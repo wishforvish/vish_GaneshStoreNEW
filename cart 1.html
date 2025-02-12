@@ -79,7 +79,7 @@
     <div class="cart-items"></div>
     <div class="cart-summary">
         <h2>Total: $<span class="cart-total">0.00</span></h2>
-        <button class="place-order">Check out</button>
+        <button class="place-order" style="color: blue;">Check out</button>
     </div>
 </main>
 
@@ -181,19 +181,7 @@
         });
   
   
-  
-      //   checkout page
-      document.addEventListener("DOMContentLoaded", () => {
-              const checkoutButton = document.createElement('button');
-              checkoutButton.textContent = 'Checkout';
-              checkoutButton.classList.add('btn', 'btn-primary');
-              checkoutButton.style.marginTop = '20px';
-              document.querySelector('.cart-summary').appendChild(checkoutButton);
-  
-              checkoutButton.addEventListener('click', () => {
-                  // Redirect to the order confirmation page
-                  window.location.href = 'order_confirmation.html'; 
-              });
+
 
 //remove cart items after placing order
               const placeOrderButton = document.querySelector(".place-order");
@@ -202,8 +190,7 @@ placeOrderButton.addEventListener("click", () => {
               localStorage.removeItem("cart");
               window.location.href = "order_confirmation.html";
             });
- 
-          });
+
   </script>
   </body>
   </html>
