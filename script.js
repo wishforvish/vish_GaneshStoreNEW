@@ -232,6 +232,40 @@ window.dataLayer = {
 
 
 
+  
+//cart icon dynamic 
+document.addEventListener("DOMContentLoaded", () => {
+  const cartCountElement = document.getElementById('cart-count');
+
+  function updateCartCount() {
+      const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+      const itemCount = cartItems.length;
+      cartCountElement.textContent = itemCount;
+  }
+
+  updateCartCount(); // Initial update
+
+  // Example addToCart function (call this from your add to cart logic)
+  function addToCart(item) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push(item);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartCount(); // Crucial: Update AFTER local storage is modified
+  }
+
+   // Example removeFromCart function (call this from your remove logic)
+  function removeFromCart(index) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartCount(); // Crucial: Update AFTER local storage is modified
+  }
+
+});
+
+
+
+
 
 
 
