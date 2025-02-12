@@ -193,6 +193,15 @@
                   // Redirect to the order confirmation page
                   window.location.href = 'order_confirmation.html'; 
               });
+
+//remove cart items after placing order
+              const placeOrderButton = document.querySelector(".place-order");
+ 
+placeOrderButton.addEventListener("click", () => {
+              localStorage.removeItem("cart");
+              window.location.href = "thankyou.html";
+            });
+ 
           });
   </script>
   </body>
