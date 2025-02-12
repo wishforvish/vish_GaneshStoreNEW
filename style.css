@@ -1867,13 +1867,6 @@ form button:hover {
 
 
 
-
-
-
-
-
-
-
 /* blog css */
 body {
   font-family: 'Roboto', sans-serif;
@@ -1920,3 +1913,27 @@ body {
   margin-bottom: 1rem;
 }
 
+
+
+/* checkout button styling */
+.place-order {
+  background-color: #007bff; /* Bootstrap primary color */
+  border: none; /* Remove default border */
+  font-size: 18px;
+  font-weight: bold;
+  padding: 12px 24px;
+  border-radius: 8px; /* Rounded corners */
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0px 4px 6px rgba(0, 123, 255, 0.3);
+}
+
+.place-order:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: translateY(-2px); /* Slight lift effect */
+  box-shadow: 0px 6px 12px rgba(0, 123, 255, 0.4);
+}
+
+.place-order:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
