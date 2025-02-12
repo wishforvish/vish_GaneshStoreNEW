@@ -152,25 +152,28 @@
 </footer>
 <!-- js for the add to cart and order confirmation -->
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const cartItemsContainer = document.querySelector(".cart-items");
-        const cartTotalElement = document.querySelector(".cart-total");
-  
-        // Get cart from localStorage
-        const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  
-        if (cart.length === 0) {
-            cartItemsContainer.innerHTML = "<p>Your cart is empty.</p>";
-            return;
-        }
-  
-        // Populate the cart items
-        cartItemsContainer.innerHTML = "";
-        cart.forEach((item, index) => {
-            const cartItem = document.createElement("div");
-            cartItem.classList.add("cart-item");
-  
-            cartItem.innerHTML = `
+document.addEventListener("DOMContentLoaded", () => {
+    const cartItemsContainer = document.querySelector(".cart-items");
+    const cartTotalElement = document.querySelector(".cart-total");
+    const placeOrderButton = document.querySelector(".place-order");
+
+    // Get cart from localStorage
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    if (cart.length === 0) {
+        cartItemsContainer.innerHTML = "<p>Your cart is empty.</p>";
+        placeOrderButton.disabled = true; // Disable the checkout button
+        placeOrderButton.style.opacity = "0.5"; // Make it look disabled
+        return;
+    }
+
+    // Populate the cart items
+    cartItemsContainer.innerHTML = "";
+    cart.forEach((item, index) => {
+        const cartItem = document.createElement("div");
+        cartItem.classList.add("cart-item");
+
+        cartItem.innerHTML = `
             <img src="${item.image}" alt="${item.title}" class="cart-item-image" />
             <div class="cart-item-info">
                 <h3>${item.title}</h3>
@@ -178,40 +181,41 @@
                 <p>Quantity: ${item.quantity}</p>
             </div>
             <button class="remove-item" data-index="${index}">Remove</button>
-            `;
-  
-            cartItemsContainer.appendChild(cartItem);
-        });
-  
-        // Calculate total price
-        const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-        cartTotalElement.textContent = totalPrice.toFixed(2);
-  
-        // Handle item removal
-        document.querySelectorAll(".remove-item").forEach((button) => {
-            button.addEventListener("click", (e) => {
+        `;
+
+        cartItemsContainer.appendChild(cartItem);
+    });
+
+    // Calculate total price
+    const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    cartTotalElement.textContent = totalPrice.toFixed(2);
+
+    // Handle item removal
+    document.querySelectorAll(".remove-item").forEach((button) => {
+        button.addEventListener("click", (e) => {
             const index = e.target.dataset.index;
-  
+
             // Remove item from cart
             cart.splice(index, 1);
             localStorage.setItem("cart", JSON.stringify(cart));
-  
+
             // Refresh the cart page
             window.location.reload();
-            });
         });
-        });
-  
-  
+    });
 
+    // Remove cart items after placing order
+    placeOrderButton.addEventListener("click", () => {
+        if (cart.length === 0) {
+            alert("Your cart is empty. Add items before checking out.");
+            return;
+        }
 
-//remove cart items after placing order
-              const placeOrderButton = document.querySelector(".place-order");
- 
-placeOrderButton.addEventListener("click", () => {
-              localStorage.removeItem("cart");
-              window.location.href = "order_confirmation.html";
-            });
+        localStorage.removeItem("cart");
+        window.location.href = "order_confirmation.html";
+    });
+});
+
 
   </script>
   </body>
